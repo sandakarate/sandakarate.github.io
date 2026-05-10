@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三田空手サークル｜兵庫県三田市</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #D93025;
+      --red-light: #F05A4F;
+      --navy: #1C2B4A;
+      --navy-mid: #2A3F6B;
+      --cream: #FAF7F2;
+      --warm: #F5F0E8;
+      --gold: #E8A020;
+      --white: #FFFFFF;
+      --text: #222222;
+      --gray: #6B7280;
+      --border: #E8E2D9;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(28,43,74,0.97);
+      backdrop-filter: blur(10px);
+      height: 60px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-logo {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900; color: white; font-size: 1.1rem;
+      letter-spacing: 0.05em; text-decoration: none;
+    }
+    .nav-logo em { color: #F05A4F; font-style: normal; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.82rem; letter-spacing: 0.1em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: white; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding-top: 60px;
+    }
+    .hero-bg-text {
+      position: absolute;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900; font-size: 28vw;
+      color: rgba(255,255,255,0.025);
+      pointer-events: none; user-select: none;
+      line-height: 1; right: -3vw; bottom: -2vw;
+    }
+    .hero-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(217,48,37,0.2);
+      animation: ringPulse 5s ease-in-out infinite;
+    }
+    .hero-ring:nth-child(1) { width: 500px; height: 500px; animation-delay: 0s; }
+    .hero-ring:nth-child(2) { width: 750px; height: 750px; animation-delay: 1.5s; }
+    .hero-ring:nth-child(3) { width: 1000px; height: 1000px; animation-delay: 3s; }
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(1.03); }
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 2rem;
+      max-width: 780px; margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(217,48,37,0.9);
+      color: white; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.18em; padding: 0.45rem 1.25rem;
+      border-radius: 999px; margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      color: white; line-height: 1.15; margin-bottom: 1.25rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero-title .red { color: #F05A4F; }
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(255,255,255,0.65);
+      font-weight: 300; letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-location {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.12em; margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease 0.25s both;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .btn-red {
+      background: var(--red); color: white;
+      padding: 0.9rem 2.2rem; border-radius: 999px;
+      text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 6px 24px rgba(217,48,37,0.45);
+      transition: all 0.25s;
+    }
+    .btn-red:hover { background: var(--red-light); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: white; padding: 0.9rem 2.2rem; border-radius: 999px;
+      text-decoration: none; font-weight: 400; font-size: 0.9rem;
+      letter-spacing: 0.08em; transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.07); transform: translateY(-2px); }
+
+    /* INFO BAR */
+    .info-bar {
+      background: var(--red);
+      display: flex; justify-content: center;
+      gap: 3rem; flex-wrap: wrap; padding: 1rem 2rem;
+    }
+    .info-bar-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: white; font-size: 0.85rem; font-weight: 500;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .label {
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      color: var(--red); font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .heading {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900; font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      color: var(--navy); line-height: 1.3; margin-bottom: 1.1rem;
+    }
+    .desc { color: var(--gray); line-height: 1.95; font-size: 0.93rem; max-width: 540px; }
+
+    /* ABOUT */
+    .about { background: white; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .av-card {
+      background: var(--warm); border-radius: 16px;
+      padding: 1.8rem 1.5rem; text-align: center;
+    }
+    .av-card.tall { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; background: var(--navy); color: white; }
+    .av-card.red-bg { background: var(--red); color: white; }
+    .av-num { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: 2.8rem; line-height: 1; }
+    .av-num sup { font-size: 1.2rem; }
+    .av-lbl { font-size: 0.75rem; opacity: 0.7; margin-top: 0.4rem; }
+    .av-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+    .av-card.tall .av-num { font-size: 3.5rem; }
+
+    /* DETAILS */
+    .details { background: var(--cream); }
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .detail-card {
+      background: white; border-radius: 18px;
+      padding: 2rem; border: 2px solid var(--border); transition: all 0.3s;
+    }
+    .detail-card:hover {
+      border-color: rgba(217,48,37,0.25); transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    }
+    .detail-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .detail-title { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.75rem; }
+    .detail-text { color: var(--gray); font-size: 0.88rem; line-height: 1.85; }
+    .detail-highlight {
+      display: inline-block; background: #FFF0EE; color: var(--red);
+      font-weight: 700; font-size: 0.82rem;
+      padding: 0.25rem 0.75rem; border-radius: 999px; margin-top: 0.75rem;
+    }
+
+    /* SCHEDULE */
+    .schedule { background: var(--navy); }
+    .schedule .heading { color: white; }
+    .schedule .desc { color: rgba(255,255,255,0.55); }
+    .schedule-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; margin-top: 3rem; overflow: hidden;
+    }
+    .schedule-main { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .sch-item {
+      padding: 2rem; border-right: 1px solid rgba(255,255,255,0.08);
+      text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sch-item:last-child { border-right: none; }
+    .sch-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .sch-value { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: 1.4rem; color: white; line-height: 1.2; }
+    .sch-value.gold { color: var(--gold); }
+    .sch-value.red { color: #F05A4F; }
+    .sch-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.3rem; }
+    .schedule-footer {
+      padding: 1.5rem 2rem;
+      display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;
+    }
+    .sch-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .sch-badge::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+    /* ACCESS */
+    .access { background: white; }
+    .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .access-map {
+      border-radius: 18px; overflow: hidden;
+      aspect-ratio: 4/3; border: 2px solid var(--border);
+      background: var(--warm); display: flex; align-items: center; justify-content: center;
+    }
+    .access-map iframe { width: 100%; height: 100%; border: none; }
+    .access-row {
+      display: flex; gap: 1rem; padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border); align-items: flex-start;
+    }
+    .access-row:last-child { border-bottom: none; }
+    .access-row-icon { font-size: 1.3rem; min-width: 2rem; text-align: center; margin-top: 0.1rem; }
+    .access-row-label { font-size: 0.72rem; color: var(--red); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .access-row-val { font-size: 0.92rem; color: var(--text); font-weight: 500; }
+    .access-row-note { font-size: 0.8rem; color: var(--gray); margin-top: 0.2rem; }
+
+    /* FAQ */
+    .faq { background: var(--cream); }
+    .faq .container { max-width: 760px; }
+    .faq-header { text-align: center; margin-bottom: 3rem; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .faq-item {
+      background: white; border: 2px solid var(--border);
+      border-radius: 14px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--red); }
+    .faq-q {
+      padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-weight: 600; font-size: 0.92rem; color: var(--navy); gap: 1rem;
+    }
+    .faq-ico {
+      min-width: 28px; height: 28px; border-radius: 50%;
+      background: var(--warm); display: flex; align-items: center;
+      justify-content: center; color: var(--red); font-weight: 700;
+      font-size: 1.1rem; transition: all 0.3s;
+    }
+    .faq-item.open .faq-ico { background: var(--red); color: white; transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a-body { padding: 0 1.5rem 1.25rem; font-size: 0.87rem; color: var(--gray); line-height: 1.9; }
+
+    /* BLOG */
+    .blog-section { background: var(--navy); }
+    .blog-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    .blog-section .heading { color: white; margin-bottom: 0.5rem; }
+    .blog-section .desc { color: rgba(255,255,255,0.55); }
+    .blog-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: white; color: var(--navy);
+      padding: 1rem 2rem; border-radius: 12px;
+      text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      white-space: nowrap; transition: all 0.25s;
+    }
+    .blog-btn:hover { background: var(--cream); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #111827; padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: 1.3rem; color: white; margin-bottom: 0.5rem; }
+    .footer-logo em { color: #F05A4F; font-style: normal; }
+    .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+    /* CONTACT */
+    .contact-section { background: var(--cream); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 4rem; align-items: start;
+    }
+    .contact-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+    .contact-card-deco {
+      text-align: center;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 900; font-size: 1.15rem;
+      color: var(--navy); margin-bottom: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+    .contact-card-lead {
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--navy); line-height: 1.85;
+      margin-bottom: 0.75rem;
+    }
+    .contact-card-sub {
+      font-size: 0.86rem; color: var(--gray);
+      line-height: 1.85; margin-bottom: 0;
+    }
+    .contact-divider {
+      border: none; border-top: 2px dashed var(--border);
+      margin: 1.5rem 0;
+    }
+    .contact-specs { display: flex; flex-direction: column; gap: 0.65rem; }
+    .cs-row { display: flex; gap: 1rem; align-items: baseline; }
+    .cs-key {
+      min-width: 3.2rem; font-size: 0.78rem; font-weight: 700;
+      color: var(--red); letter-spacing: 0.05em;
+      background: #FFF0EE; padding: 0.15rem 0.55rem;
+      border-radius: 4px; text-align: center;
+      flex-shrink: 0;
+    }
+    .cs-val { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+    .contact-welcome {
+      text-align: center; font-size: 0.9rem;
+      font-weight: 700; color: var(--navy);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .details-grid, .access-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-visual { grid-template-columns: 1fr 1fr; }
+      .schedule-main { grid-template-columns: 1fr 1fr; }
+      .info-bar { gap: 1.5rem; }
+      section { padding: 4rem 1.25rem; }
+      .blog-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo">三田<em>空手</em>サークル</a>
+  <ul class="nav-links">
+    <li><a href="#about">サークルについて</a></li>
+    <li><a href="#details">参加案内</a></li>
+    <li><a href="#schedule">日程・会費</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#contact">参加方法</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="top">
+  <section class="hero">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-bg-text">拳</div>
+    <div class="hero-content">
+      <div class="hero-tag">🥋 初心者・運動不足の方も大歓迎！</div>
+      <h1 class="hero-title">
+        気軽に、楽しく、<br>
+        <span class="red">一緒に汗を流そう。</span>
+      </h1>
+      <p class="hero-subtitle">三田空手サークル — SANDA KARATE CIRCLE</p>
+      <p class="hero-location">📍 兵庫県三田市 富士中学 武道場</p>
+      <div class="hero-cta">
+        <a href="#details" class="btn-red">参加方法を見る</a>
+        <a href="#schedule" class="btn-outline">日程・会費を確認</a>
+      </div>
+    </div>
+  </section>
+  <div class="info-bar">
+    <div class="info-bar-item">📅 毎週土曜日</div>
+    <div class="info-bar-item">🕖 19:00〜21:00</div>
+    <div class="info-bar-item">💴 1回 300円</div>
+    <div class="info-bar-item">👕 服装・道具不要</div>
+    <div class="info-bar-item">🅿️ 駐車場あり</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <p class="label">About Us</p>
+        <h2 class="heading">運動不足解消から<br>本格的な空手まで。</h2>
+        <p class="desc">
+          三田空手サークルは、兵庫県三田市で活動する地域の空手サークルです。
+          元道場メンバーを中心に、初心者から経験者まで一緒に楽しく練習しています。
+        </p>
+        <p class="desc" style="margin-top:1rem">
+          「ダイエットしたい」「汗を流したい」「空手に興味がある」そんな動機で十分。
+          少人数のアットホームな雰囲気で、自分のペースで無理なく続けられます。
+          難波空手サークルとの合同練習など、仲間の輪も広がっています。
+        </p>
+      </div>
+      <div class="about-visual">
+        <div class="av-card tall">
+          <span class="av-icon">🥋</span>
+          <div class="av-num">毎週<br>土曜</div>
+          <div class="av-lbl">定期練習</div>
+        </div>
+        <div class="av-card red-bg">
+          <div class="av-num">300<sup>円</sup></div>
+          <div class="av-lbl">1回の参加費</div>
+        </div>
+        <div class="av-card">
+          <div class="av-num" style="color:var(--navy)">2h</div>
+          <div class="av-lbl" style="color:var(--gray)">練習時間</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="details" id="details">
+  <div class="container">
+    <p class="label">How to Join</p>
+    <h2 class="heading">参加はとっても気軽です</h2>
+    <p class="desc">必要なものは「参加したい！」という気持ちだけ。ふらっと見学だけでもOKです。</p>
+    <div class="details-grid">
+      <div class="detail-card">
+        <span class="detail-icon">👕</span>
+        <div class="detail-title">服装は自由</div>
+        <p class="detail-text">動きやすい格好であれば何でもOK。ジャージやスポーツウェアで気軽にお越しください。道着がある方はもちろん着用できます。</p>
+        <span class="detail-highlight">Tシャツ＋ジャージでOK</span>
+      </div>
+      <div class="detail-card">
+        <span class="detail-icon">🥊</span>
+        <div class="detail-title">道具は不要</div>
+        <p class="detail-text">防具はサークルで貸し出しているので、手ぶらで参加できます。慣れてきたら少しずつ揃えていけば大丈夫です。</p>
+        <span class="detail-highlight">貸出防具あり</span>
+      </div>
+      <div class="detail-card">
+        <span class="detail-icon">👨‍👩‍👧</span>
+        <div class="detail-title">年齢・経験不問</div>
+        <p class="detail-text">18歳以上であれば未経験でも大歓迎。親子での参加は年齢不問です。経験者も初心者も一緒に楽しく練習しています。</p>
+        <span class="detail-highlight">親子参加もOK</span>
+      </div>
+      <div class="detail-card">
+        <span class="detail-icon">🅿️</span>
+        <div class="detail-title">駐車場完備</div>
+        <p class="detail-text">富士中学の駐車場が利用できます。車での参加も安心です。三田市内からのアクセスも便利です。</p>
+        <span class="detail-highlight">無料駐車場あり</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="container">
+    <p class="label" style="color:rgba(255,255,255,0.4)">Schedule & Fee</p>
+    <h2 class="heading">練習日程・会費</h2>
+    <p class="desc">見学・体験はいつでも歓迎！気軽に足を運んでみてください。</p>
+    <div class="schedule-card">
+      <div class="schedule-main">
+        <div class="sch-item">
+          <div class="sch-label">曜日</div>
+          <div class="sch-value gold">土曜日</div>
+          <div class="sch-sub">毎週</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-label">時間</div>
+          <div class="sch-value">19:00</div>
+          <div class="sch-sub">〜 21:00</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-label">場所</div>
+          <div class="sch-value" style="font-size:1.05rem;line-height:1.4">富士中学<br>武道場</div>
+          <div class="sch-sub">正門入って右奥</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-label">会費</div>
+          <div class="sch-value red">300<span style="font-size:0.9rem;font-weight:500">円</span></div>
+          <div class="sch-sub">1回あたり</div>
+        </div>
+      </div>
+      <div class="schedule-footer">
+        <div class="sch-badge">見学・体験無料</div>
+        <div class="sch-badge">月会費なし・都度払い</div>
+        <div class="sch-badge">難波サークルとの合同練習あり</div>
+        <div class="sch-badge">駐車場あり</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access" id="access">
+  <div class="container">
+    <p class="label">Access</p>
+    <h2 class="heading">アクセス</h2>
+    <div class="access-grid">
+      <div class="access-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52386.0!2d135.228!3d34.889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008e3a4e7abc6b%3A0xa56db9d51a0a907!2z5YW25a4Y5Lit5a2457Sj6Zmi5qCh5ZKM5ZCI5a6k5Yy6!5e0!3m2!1sja!2sjp!4v1"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="富士中学武道場 地図">
+        </iframe>
+      </div>
+      <div class="access-info">
+        <div class="access-row">
+          <div class="access-row-icon">🏫</div>
+          <div>
+            <div class="access-row-label">場所</div>
+            <div class="access-row-val">富士中学校 武道場</div>
+            <div class="access-row-note">正門入って右奥</div>
+          </div>
+        </div>
+        <div class="access-row">
+          <div class="access-row-icon">🗺️</div>
+          <div>
+            <div class="access-row-label">エリア</div>
+            <div class="access-row-val">兵庫県三田市</div>
+          </div>
+        </div>
+        <div class="access-row">
+          <div class="access-row-icon">🅿️</div>
+          <div>
+            <div class="access-row-label">駐車場</div>
+            <div class="access-row-val">あり（無料）</div>
+            <div class="access-row-note">学校駐車場を利用</div>
+          </div>
+        </div>
+        <div class="access-row">
+          <div class="access-row-icon">📅</div>
+          <div>
+            <div class="access-row-label">練習日時</div>
+            <div class="access-row-val">毎週土曜日 19:00〜21:00</div>
+          </div>
+        </div>
+        <div class="access-row">
+          <div class="access-row-icon">💴</div>
+          <div>
+            <div class="access-row-label">参加費</div>
+            <div class="access-row-val">300円／回（都度払い）</div>
+            <div class="access-row-note">月会費なし・見学無料</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <p class="label">FAQ</p>
+      <h2 class="heading">よくある質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>空手の経験がまったくないのですが参加できますか？</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-body">もちろん大歓迎です！「運動不足を解消したい」「ダイエットしたい」「汗を流したい」など、どんな動機でも構いません。経験者が丁寧に教えますので安心してお越しください。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>まず見学だけでもいいですか？</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-body">もちろんです。見学・体験は無料ですので、気軽に足を運んでみてください。練習の雰囲気を見てから参加を決めていただいて大丈夫です。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>道着や防具は必要ですか？</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-body">不要です。服装は運動できる格好であれば自由で、防具はサークルで貸し出ししています。手ぶらで来ていただいて大丈夫です。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>毎週参加しないといけませんか？</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-body">会費は都度払い（1回300円）なので、来られる時だけ参加していただければOKです。月会費などはありませんので、自分のペースで無理なく続けられます。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>子供と一緒に参加できますか？</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-body">親子での参加は年齢不問で歓迎しています。通常は18歳以上が対象ですが、保護者と一緒であればお子さんの参加も受け付けています。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <p class="label">How to Join</p>
+        <h2 class="heading">参加方法</h2>
+        <p class="desc">
+          体験に参加したい方はお問い合わせください。<br>
+          直接来てもらっても大丈夫です！
+        </p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-deco">🔷 三田空手サークル 🔷</div>
+        <p class="contact-card-lead">初心者から経験者まで、一緒に汗を流しませんか？<br>少人数ですが、楽しく活動しています。</p>
+        <p class="contact-card-sub">ダイエットしたい方、汗をかきたい方、何でも大丈夫です。自分のペースでやっていきましょう。服装は運動できる恰好なら自由です。</p>
+        <div class="contact-divider"></div>
+        <div class="contact-specs">
+          <div class="cs-row"><span class="cs-key">曜日</span><span class="cs-val">土曜日 19時〜21時　駐車場あり</span></div>
+          <div class="cs-row"><span class="cs-key">場所</span><span class="cs-val">富士中学 武道場（正門入って右奥）</span></div>
+          <div class="cs-row"><span class="cs-key">年齢</span><span class="cs-val">18歳以上（親子参加は年齢不問）</span></div>
+          <div class="cs-row"><span class="cs-key">服装</span><span class="cs-val">自由</span></div>
+          <div class="cs-row"><span class="cs-key">道具</span><span class="cs-val">不要（貸出防具あり）</span></div>
+          <div class="cs-row"><span class="cs-key">会費</span><span class="cs-val">300円／回</span></div>
+        </div>
+        <div class="contact-divider"></div>
+        <p class="contact-welcome">見学・体験は無料！お気軽にどうぞ 🥋</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section">
+  <div class="container">
+    <div class="blog-inner">
+      <div>
+        <p class="label" style="color:rgba(255,255,255,0.4)">Blog</p>
+        <h2 class="heading">練習日記を書いています</h2>
+        <p class="desc">毎回の練習の様子をアメブロで更新中。雰囲気を確認するのにもどうぞ！</p>
+      </div>
+      <a href="https://ameblo.jp/sanda-karate/" target="_blank" rel="noopener" class="blog-btn">
+        📝 アメブロで読む →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">三田<em>空手</em>サークル</div>
+  <p class="footer-tagline">兵庫県三田市 富士中学 武道場 ｜ 毎週土曜 19:00〜21:00</p>
+  <ul class="footer-links">
+    <li><a href="#about">サークルについて</a></li>
+    <li><a href="#details">参加案内</a></li>
+    <li><a href="#schedule">日程・会費</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://ameblo.jp/sanda-karate/" target="_blank">ブログ</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 三田空手サークル. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.detail-card, .faq-item, .av-card, .access-row').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
