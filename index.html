@@ -335,10 +335,74 @@
     .footer-links a:hover { color: white; }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
 
+
+    /* GALLERY */
+    .gallery { background: var(--navy); }
+    .gallery .heading { color: white; }
+    .gallery .desc { color: rgba(255,255,255,0.55); }
+    .gallery-header { text-align: center; margin-bottom: 3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item.wide { grid-column: span 2; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      color: white; font-size: 2rem; cursor: pointer;
+      background: rgba(255,255,255,0.1);
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+    .lightbox-prev, .lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      color: white; font-size: 2rem; cursor: pointer;
+      background: rgba(255,255,255,0.1);
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .about-grid, .details-grid, .access-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
       .about-visual { grid-template-columns: 1fr 1fr; }
       .schedule-main { grid-template-columns: 1fr 1fr; }
       .info-bar { gap: 1.5rem; }
@@ -567,6 +631,22 @@
   </div>
 </section>
 
+<!-- BLOG -->
+<section class="blog-section">
+  <div class="container">
+    <div class="blog-inner">
+      <div>
+        <p class="label" style="color:rgba(255,255,255,0.4)">Blog</p>
+        <h2 class="heading">練習日記を書いています</h2>
+        <p class="desc">毎回の練習の様子をアメブロで更新中。雰囲気を確認するのにもどうぞ！</p>
+      </div>
+      <a href="https://ameblo.jp/sanda-karate/" target="_blank" rel="noopener" class="blog-btn">
+        📝 アメブロで読む →
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="container">
@@ -624,21 +704,41 @@
   </div>
 </section>
 
-<!-- BLOG -->
-<section class="blog-section">
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
   <div class="container">
-    <div class="blog-inner">
-      <div>
-        <p class="label" style="color:rgba(255,255,255,0.4)">Blog</p>
-        <h2 class="heading">練習日記を書いています</h2>
-        <p class="desc">毎回の練習の様子をアメブロで更新中。雰囲気を確認するのにもどうぞ！</p>
-      </div>
-      <a href="https://ameblo.jp/sanda-karate/" target="_blank" rel="noopener" class="blog-btn">
-        📝 アメブロで読む →
-      </a>
+    <div class="gallery-header">
+      <p class="label" style="color:rgba(255,255,255,0.4)">Gallery</p>
+      <h2 class="heading">練習風景</h2>
+      <p class="desc" style="margin:0 auto">毎週土曜日、富士中学武道場で熱く練習しています。</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide" onclick="openLightbox(0)"><img src="img01.png" alt="空手練習風景1" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="img02.png" alt="空手練習風景2" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="img03.png" alt="練習後の交流" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="img04.png" alt="組手練習" loading="lazy"></div>
+      <div class="gallery-item wide" onclick="openLightbox(4)"><img src="img05.png" alt="空手練習風景5" loading="lazy"></div>
+      <div class="gallery-item wide" onclick="openLightbox(5)"><img src="img06.png" alt="空手練習風景6" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="img07.png" alt="空手練習風景7" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(7)"><img src="img08.png" alt="空手練習風景8" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(8)"><img src="img09.png" alt="空手練習風景9" loading="lazy"></div>
+      <div class="gallery-item wide" onclick="openLightbox(9)"><img src="img10.png" alt="空手練習風景10" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(10)"><img src="img11.png" alt="空手練習風景11" loading="lazy"></div>
+      <div class="gallery-item wide" onclick="openLightbox(11)"><img src="img12.png" alt="空手練習風景12" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(12)"><img src="img13.png" alt="空手練習風景13" loading="lazy"></div>
     </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <div class="lightbox-prev" onclick="changeImage(-1)">‹</div>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-next" onclick="changeImage(1)">›</div>
+</div>
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -663,6 +763,36 @@
 </div>
 
 <script>
+
+  // Lightbox
+  const images = [
+    'img01.png','img02.png','img03.png','img04.png','img05.png',
+    'img06.png','img07.png','img08.png','img09.png','img10.png',
+    'img11.png','img12.png','img13.png'
+  ];
+  let currentIndex = 0;
+  function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById('lightbox-img').src = images[index];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  function changeImage(dir) {
+    currentIndex = (currentIndex + dir + images.length) % images.length;
+    document.getElementById('lightbox-img').src = images[currentIndex];
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'ArrowLeft') changeImage(-1);
+  });
+
   function toggleFaq(el) {
     const item = el.parentElement;
     const answer = item.querySelector('.faq-a');
