@@ -774,7 +774,6 @@
   <div class="lightbox-prev" onclick="changeImage(-1)">‹</div>
   <img id="lightbox-img" src="" alt="">
   <div class="lightbox-next" onclick="changeImage(1)">›</div>
-</div>
 
 
 
@@ -875,43 +874,90 @@
   resetTimer();
 
 
-  // アメブロ最新記事取得
-  (function() {
-    const rssUrl = 'https://ameblo.jp/sanda-karate/rss.html';
-    const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=5';
-    fetch(apiUrl)
-      .then(r => r.json())
-      .then(data => {
-        const container = document.getElementById('blog-posts');
-        if (!data.items || data.items.length === 0) {
-          container.innerHTML = '';
-          return;
-        }
-        let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
-        data.items.forEach(item => {
-          const date = new Date(item.pubDate).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'});
-          html += `
-            <a href="${item.link}" target="_blank" rel="noopener" style="
-              display:flex; justify-content:space-between; align-items:center;
-              background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
-              border-radius:12px; padding:1rem 1.5rem; text-decoration:none;
-              transition:all 0.2s; gap:1rem;
-            " onmouseover="this.style.background='rgba(255,255,255,0.12)'"
-               onmouseout="this.style.background='rgba(255,255,255,0.06)'">
-              <div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">
-                <span style="color:var(--red);font-size:1rem;flex-shrink:0;">📝</span>
-                <span style="color:white;font-size:0.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</span>
-              </div>
-              <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;white-space:nowrap;flex-shrink:0;">${date}</span>
-            </a>`;
-        });
-        html += '</div>';
-        container.innerHTML = html;
-      })
-      .catch(() => {
-        document.getElementById('blog-posts').innerHTML = '';
+// アメブロ最新記事取得
+  const apiUrl =
+    'https://api.rss2json.com/v1/api.json?rss_url=' +
+    encodeURIComponent(rssUrl) +
+    '&count=5';
+
+  fetch(apiUrl)
+    .then(r => r.json())
+    .then(data => {
+
+      const container = document.getElementById('blog-posts');
+
+      if (!container) return;
+
+      if (!data.items || data.items.length === 0) {
+        container.innerHTML =
+          '<div style="color:rgba(255,255,255,0.45);text-align:center;padding:1rem;">記事がありません</div>';
+        return;
+      }
+
+      let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
+
+      data.items.forEach(item => {
+
+        const date = new Date(item.pubDate)
+          .toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+        html += `
+          <a href="${item.link}" target="_blank" rel="noopener" style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;
+            padding:1rem 1.5rem;
+            text-decoration:none;
+            transition:all 0.2s;
+            gap:1rem;
+          "
+          onmouseover="this.style.background='rgba(255,255,255,0.12)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+
+            <div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">
+              <span style="color:var(--red);font-size:1rem;flex-shrink:0;">📝</span>
+
+              <span style="
+                color:white;
+                font-size:0.9rem;
+                font-weight:500;
+                white-space:nowrap;
+                overflow:hidden;
+                text-overflow:ellipsis;
+              ">
+                ${item.title}
+              </span>
+            </div>
+
+            <span style="
+              color:rgba(255,255,255,0.4);
+              font-size:0.78rem;
+              white-space:nowrap;
+              flex-shrink:0;
+            ">
+              ${date}
+            </span>
+          </a>`;
       });
-  })();
+
+      html += '</div>';
+
+      container.innerHTML = html;
+    })
+    .catch(err => {
+      console.error('RSS取得失敗:', err);
+
+      document.getElementById('blog-posts').innerHTML =
+        '<div style="color:#ffb4b4;text-align:center;padding:1rem;">記事を取得できませんでした</div>';
+    });
+})();
 
   function toggleFaq(el) {
     const item = el.parentElement;
