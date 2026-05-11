@@ -877,7 +877,7 @@
 
   // アメブロ最新記事取得
   (function() {
-    const rssUrl = 'https://ameblo.jp/sanda-karate/rss20.xml';
+    const rssUrl = 'https://ameblo.jp/sanda-karate/rss.html';
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=5';
     fetch(apiUrl)
       .then(r => r.json())
