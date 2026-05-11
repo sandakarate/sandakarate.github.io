@@ -29,7 +29,7 @@
     "@type": "SportsClub",
     "name": "三田空手サークル",
     "description": "兵庫県三田市で活動する空手サークル。初心者から経験者まで歓迎。毎週土曜19時〜21時開催。",
-    "url": "",
+    "url": "https://sandakarate.github.io/",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "富士中学校 武道場",
@@ -840,7 +840,7 @@
 
   function resetTimer() {
     clearInterval(slideTimer);
-    if (!paused) slideTimer = setInterval(() => goToSlide(slideIndex + 1), 1500);
+    if (!paused) slideTimer = setInterval(() => goToSlide(slideIndex + 1), 2000);
   }
 
   function togglePause() {
@@ -875,41 +875,43 @@
   resetTimer();
 
 
-  // アメブロ最新記事取得
+  // アメブロ最新記事取得（Googleフィード経由）
   (function() {
-    const rssUrl = 'https://ameblo.jp/sanda-karate/rss20.xml';
-    const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=5';
+    const rssUrl = encodeURIComponent('https://ameblo.jp/sanda-karate/rss20.xml');
+    const apiUrl = `https://api.allorigins.win/get?url=${rssUrl}`;
     fetch(apiUrl)
       .then(r => r.json())
       .then(data => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, 'text/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0, 5);
         const container = document.getElementById('blog-posts');
-        if (!data.items || data.items.length === 0) {
-          container.innerHTML = '';
-          return;
-        }
+        if (!items.length) { container.innerHTML = ''; return; }
         let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
-        data.items.forEach(item => {
-          const date = new Date(item.pubDate).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'});
-          html += `
-            <a href="${item.link}" target="_blank" rel="noopener" style="
-              display:flex; justify-content:space-between; align-items:center;
-              background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
-              border-radius:12px; padding:1rem 1.5rem; text-decoration:none;
-              transition:all 0.2s; gap:1rem;
-            " onmouseover="this.style.background='rgba(255,255,255,0.12)'"
-               onmouseout="this.style.background='rgba(255,255,255,0.06)'">
-              <div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">
-                <span style="color:var(--red);font-size:1rem;flex-shrink:0;">📝</span>
-                <span style="color:white;font-size:0.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</span>
-              </div>
-              <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;white-space:nowrap;flex-shrink:0;">${date}</span>
-            </a>`;
+        items.forEach(item => {
+          const title = item.querySelector('title')?.textContent || '';
+          const link  = item.querySelector('link')?.textContent || '#';
+          const pub   = item.querySelector('pubDate')?.textContent || '';
+          const date  = pub ? new Date(pub).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) : '';
+          html += `<a href="${link}" target="_blank" rel="noopener" style="
+              display:flex;justify-content:space-between;align-items:center;
+              background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+              border-radius:12px;padding:1rem 1.5rem;text-decoration:none;
+              transition:background 0.2s;gap:1rem;"
+            onmouseover="this.style.background='rgba(255,255,255,0.12)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+            <div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">
+              <span style="color:var(--red);flex-shrink:0;">📝</span>
+              <span style="color:white;font-size:0.9rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${title}</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;white-space:nowrap;flex-shrink:0;">${date}</span>
+          </a>`;
         });
         html += '</div>';
         container.innerHTML = html;
       })
       .catch(() => {
-        document.getElementById('blog-posts').innerHTML = '';
+        document.getElementById('blog-posts').innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.85rem;text-align:center;">記事の読み込みに失敗しました。<a href="https://ameblo.jp/sanda-karate/" target="_blank" style="color:var(--red-light);">ブログを直接見る →</a></p>';
       });
   })();
 
