@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>三田空手サークル｜兵庫県三田市・三木市・西宮市・川西市・宝塚市・神戸市北区</title>
   <meta name="description" content="兵庫県三田市で活動する空手サークルです。初心者・未経験者大歓迎！毎週土曜19時〜21時、富士中学武道場にて練習。参加費300円／回、服装自由、道具不要。三田市・三木市・西宮市・川西市・宝塚市・神戸市北区近辺の方もぜひご参加ください。">
-  <meta name="keywords" content="空手,空手サークル,三田市,神戸市北区,三木市,宝塚市,猪名川町,高槻市,西宮市,川西市,兵庫県,武道,格闘技,初心者,空手教室,護身術,ダイエット,運動不足,スポーツサークル,武道サークル">
+  <meta name="keywords" content="空手,格闘技,武道,護身術,組手,フルコンタクト,空手サークル,三田市,神戸市北区,三木市,宝塚市,猪名川町,高槻市,西宮市,川西市,兵庫県,武道,格闘技,初心者,空手教室,護身術,ダイエット,運動不足,スポーツサークル,武道サークル">
   <meta name="robots" content="index, follow">
   <meta name="author" content="三田空手サークル">
 
@@ -428,6 +428,37 @@
     .slide-pause:hover { background: rgba(255,255,255,0.2); color: white; }
 
 
+
+    /* RECOMMEND */
+    .recommend { background: white; }
+    .recommend-header { text-align: center; margin-bottom: 3rem; }
+    .recommend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .rec-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      border: 2px solid var(--border);
+      transition: all 0.3s;
+    }
+    .rec-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    }
+    .rec-icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+    .rec-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .rec-text { font-size: 0.83rem; color: var(--gray); line-height: 1.75; }
+
     /* CONTACT FORM */
     .contact-form-section { background: var(--cream); }
     .contact-form-section .heading { color: var(--navy); }
@@ -540,8 +571,8 @@
     <div class="hero-content">
       <div class="hero-tag">🥋 初心者・運動不足の方も大歓迎！</div>
       <h1 class="hero-title">
-        気軽に、楽しく、<br>
-        <span class="red">一緒に汗を流そう。</span>
+        拳を交え、<br>
+        <span class="red">仲間と成長しよう。</span>
       </h1>
       <p class="hero-subtitle">三田空手サークル<br>— SANDA KARATE CIRCLE —</p>
       <p class="hero-location">📍 兵庫県三田市 富士中学 武道場</p>
@@ -599,6 +630,50 @@
     </div>
   </div>
 </section>
+
+<!-- RECOMMEND -->
+<section class="recommend" id="recommend">
+  <div class="container">
+    <div class="recommend-header">
+      <p class="label">こんな方におすすめ</p>
+      <h2 class="heading">あなたにも、きっと合います</h2>
+      <p class="desc" style="margin:0 auto">動機は何でもOK。一歩踏み出す勇気があれば大丈夫です。</p>
+    </div>
+    <div class="recommend-grid">
+      <div class="rec-card">
+        <span class="rec-icon">🥊</span>
+        <div class="rec-title">格闘技に興味がある</div>
+        <p class="rec-text">空手・格闘技をやってみたいけどハードルが高そう…そんな方こそ大歓迎。実際に体を動かしてみると楽しさがわかります。</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-icon">🛡️</span>
+        <div class="rec-title">護身術を身につけたい</div>
+        <p class="rec-text">空手は実践的な護身術としても有効です。いざというときに自分や家族を守る力を身につけられます。</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-icon">💪</span>
+        <div class="rec-title">体を鍛えたい・ダイエットしたい</div>
+        <p class="rec-text">2時間の練習でしっかり汗をかけます。ジムに通うより楽しく続けられると評判です。</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-icon">😤</span>
+        <div class="rec-title">ストレスを発散したい</div>
+        <p class="rec-text">思い切り体を動かしてスッキリ！仕事や日常のストレスをサンドバッグや組手で思いっきり発散できます。</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-icon">🤝</span>
+        <div class="rec-title">新しい仲間を作りたい</div>
+        <p class="rec-text">年齢・職業バラバラの仲間が集まる場所。空手を通じて深い絆が生まれます。練習後の食事も楽しみのひとつ。</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-icon">👨‍👧</span>
+        <div class="rec-title">親子で何か始めたい</div>
+        <p class="rec-text">親子での参加も大歓迎（18歳未満は参加費無料）。一緒に汗を流すことで親子の絆も深まります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- DETAILS -->
 <section class="details" id="details">
