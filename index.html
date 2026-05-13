@@ -765,17 +765,26 @@
       <p class="desc" style="margin:0 auto;">体験参加や見学のご希望、ご質問などお気軽にどうぞ。<br>直接来ていただいても大丈夫です！</p>
     </div>
     <div class="contact-form-wrap" style="padding:1.5rem;">
-      <div style="overflow:hidden; height:480px; position:relative;">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSeQRR3_9XfWt0ZkAt3hL3GyrU9kaoJfkLZPBOEzVCboJKSang/viewform?embedded=true"
-          width="100%"
-          height="700"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          style="border:none; display:block; margin-top:-220px;">
-          読み込んでいます…
-        </iframe>
+      <form id="contact-form-inner" action="https://formspree.io/f/maqvkepj" method="POST">
+        <div class="cf-row">
+          <label class="cf-label">お名前<span class="req">必須</span></label>
+          <input type="text" name="name" class="cf-input" placeholder="山田 太郎" required>
+        </div>
+        <div class="cf-row">
+          <label class="cf-label">連絡先メールアドレス<span class="req">必須</span></label>
+          <input type="email" name="email" class="cf-input" placeholder="example@email.com" required>
+        </div>
+        <div class="cf-row">
+          <label class="cf-label">ご質問・メッセージ<span class="req">必須</span></label>
+          <textarea name="message" class="cf-textarea" placeholder="気になることや質問があればどうぞ！体験希望の日程などもお知らせください。" required></textarea>
+        </div>
+        <button type="submit" class="cf-submit">送信する 🥋</button>
+        <p class="cf-note">送信後、確認次第ご連絡いたします。</p>
+      </form>
+      <div class="cf-success" id="cf-success" style="display:none;">
+        <div class="cf-success-icon">✅</div>
+        <h3>送信完了しました！</h3>
+        <p>お問い合わせありがとうございます。<br>確認次第ご連絡いたします。</p>
       </div>
     </div>
   </div>
@@ -832,7 +841,7 @@
           <div class="faq-ico">+</div>
         </div>
         <div class="faq-a">
-          <div class="faq-a-body">親子での参加は年齢不問で歓迎しています。通常は18歳以上が対象ですが、保護者と一緒であればお子さんの参加も受け付けています。</div>
+          <div class="faq-a-body">親子での参加は年齢不問で歓迎しています。通常は18歳以上が対象ですが、保護者と一緒であればお子さんの参加も受け付けています。18歳未満のお子さんの参加費は無料です。</div>
         </div>
       </div>
     </div>
@@ -1027,6 +1036,29 @@
     tryProxy(0);
   })();
 
+
+
+  // お問い合わせフォーム送信
+  const cfForm = document.getElementById('contact-form-inner');
+  if (cfForm) {
+    cfForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch(cfForm.action, {
+        method: 'POST',
+        body: new FormData(cfForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(r => {
+        if (r.ok) {
+          cfForm.style.display = 'none';
+          document.getElementById('cf-success').style.display = 'block';
+        } else {
+          alert('送信に失敗しました。時間をおいて再度お試しください。');
+        }
+      }).catch(() => {
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      });
+    });
+  }
 
   function toggleFaq(el) {
     const item = el.parentElement;
