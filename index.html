@@ -537,11 +537,58 @@
     .cf-success p { font-size: 0.9rem; color: var(--gray); }
 
 
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(28,43,74,0.98);
+      backdrop-filter: blur(10px);
+      z-index: 99;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.08); color: white; }
+    .mobile-menu a:last-child { border-bottom: none; }
+
     .sp-br { display: none; }
     @media (max-width: 768px) { .sp-br { display: block; } }
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .hamburger { display: flex; }
       .about-grid, .details-grid, .access-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item.wide { grid-column: span 1; }
@@ -558,6 +605,9 @@
 <!-- NAV -->
 <nav>
   <a href="#top" class="nav-logo">三田<em>空手</em>サークル</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="#about">サークルについて</a></li>
     <li><a href="#details">参加案内</a></li>
@@ -566,6 +616,17 @@
     <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">サークルについて</a>
+  <a href="#recommend" onclick="closeMenu()">こんな方におすすめ</a>
+  <a href="#details" onclick="closeMenu()">参加案内</a>
+  <a href="#gallery" onclick="closeMenu()">ギャラリー</a>
+  <a href="#schedule" onclick="closeMenu()">日程・会費</a>
+  <a href="#access" onclick="closeMenu()">アクセス</a>
+  <a href="#blog" onclick="closeMenu()">ブログ</a>
+  <a href="#contact-form" onclick="closeMenu()">お問い合わせ</a>
+  <a href="#faq" onclick="closeMenu()">よくある質問</a>
+</div>
 
 <!-- HERO -->
 <div id="top">
@@ -767,7 +828,7 @@
     <div class="access-grid">
       <div class="access-map">
         <iframe
-          src="https://maps.google.com/maps?q=兵庫県三田市富士が丘3-25&output=embed&z=13"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.8!2d135.2213!3d34.8968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f4a0e0000001%3A0x1!2z5YW25a4Y5biC5a695qmL5YyX77yT77yV!5e0!3m2!1sja!2sjp!4v1&q=%E5%85%B5%E5%BA%AB%E7%9C%8C%E4%B8%89%E7%94%B0%E5%B8%82%E5%AF%8C%E5%A3%AB%E3%81%8C%E4%B8%983-25+%E4%B8%89%E7%94%B0%E5%B8%82%E7%AB%8B%E5%AF%8C%E5%A3%AB%E4%B8%AD%E5%AD%A6%E6%A0%A1"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="富士中学校武道場 地図">
@@ -947,7 +1008,7 @@
     </div>
     <div class="slideshow-wrap">
       <div class="slideshow" id="slideshow">
-        <div class="slide active"><img src="img01.webp" alt="空手練習風景1" loading="lazy"></div>
+        <div class="slide active"><img src="img01.webp" alt="空手練習風景1" fetchpriority="high"></div>
         <div class="slide"><img src="img02.webp" alt="空手練習風景2" loading="lazy"></div>
         <div class="slide"><img src="img03.webp" alt="練習後の交流" loading="lazy"></div>
         <div class="slide"><img src="img04.webp" alt="組手練習" loading="lazy"></div>
@@ -969,10 +1030,7 @@
     </div>
   </div>
 </section>
-
-  <div class="lightbox-prev" onclick="changeImage(-1)">‹</div>
-  <img id="lightbox-img" src="" alt="">
-  <div class="lightbox-next" onclick="changeImage(1)">›</div>
+<img id="lightbox-img" src="" alt="">
 </div>
 
 
@@ -1039,7 +1097,7 @@
 
   function resetTimer() {
     clearInterval(slideTimer);
-    if (!paused) slideTimer = setInterval(() => goToSlide(slideIndex + 1), 2000);
+    if (!paused) slideTimer = setInterval(() => goToSlide(slideIndex + 1), 3500);
   }
 
   function togglePause() {
@@ -1147,6 +1205,18 @@
         alert('送信に失敗しました。時間をおいて再度お試しください。');
       });
     });
+  }
+
+
+  function toggleMenu() {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobile-menu').classList.remove('open');
   }
 
   function toggleFaq(el) {
