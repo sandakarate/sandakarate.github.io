@@ -658,6 +658,27 @@
   </div>
 </div>
 
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="slideshow-wrap">
+      <div class="slideshow" id="slideshow">
+        <div class="slide active"><img src="img01.webp" alt="空手練習風景1" fetchpriority="high"></div>
+        <div class="slide"><img src="img02.webp" alt="空手練習風景2" loading="lazy"></div>
+        <div class="slide"><img src="img03.webp" alt="空手練習風景3" loading="lazy"></div>
+        <div class="slide"><img src="img04.webp" alt="空手練習風景4" loading="lazy"></div>
+        <div class="slide"><img src="img05.webp" alt="空手練習風景5" loading="lazy"></div>
+        <div class="slide"><img src="img06.webp" alt="空手練習風景6" loading="lazy"></div>
+        <button class="slide-prev" onclick="slideMove(-1)">&#8249;</button>
+        <button class="slide-next" onclick="slideMove(1)">&#8250;</button>
+        <div class="slide-counter"><span id="slide-cur">1</span> / 6</div>
+      </div>
+      <div class="slide-dots" id="slide-dots"></div>
+      <button class="slide-pause" id="slide-pause" onclick="togglePause()">⏸ 一時停止</button>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="container">
@@ -1019,31 +1040,7 @@
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <div class="container">
-    <div class="gallery-header">
-      <p class="label" style="color:rgba(255,255,255,0.4)">Gallery</p>
-      <h2 class="heading">練習風景</h2>
-      <p class="desc" style="margin:0 auto">毎週土曜日、富士中学武道場で熱く練習しています。</p>
-    </div>
-    <div class="slideshow-wrap">
-      <div class="slideshow" id="slideshow">
-        <div class="slide active"><img src="img01.webp" alt="空手練習風景1" fetchpriority="high"></div>
-        <div class="slide"><img src="img02.webp" alt="空手練習風景2" loading="lazy"></div>
-        <div class="slide"><img src="img03.webp" alt="空手練習風景3" loading="lazy"></div>
-        <div class="slide"><img src="img04.webp" alt="空手練習風景4" loading="lazy"></div>
-        <div class="slide"><img src="img05.webp" alt="空手練習風景5" loading="lazy"></div>
-        <div class="slide"><img src="img06.webp" alt="空手練習風景6" loading="lazy"></div>
-        <button class="slide-prev" onclick="slideMove(-1)">&#8249;</button>
-        <button class="slide-next" onclick="slideMove(1)">&#8250;</button>
-        <div class="slide-counter"><span id="slide-cur">1</span> / 6</div>
-      </div>
-      <div class="slide-dots" id="slide-dots"></div>
-      <button class="slide-pause" id="slide-pause" onclick="togglePause()">⏸ 一時停止</button>
-    </div>
-  </div>
-</section>
+
 
 
 
