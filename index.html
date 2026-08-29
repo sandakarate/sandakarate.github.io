@@ -1149,6 +1149,7 @@
     const proxies = [
       `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
       `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
+      `https://thingproxy.freeboard.io/fetch/${rssUrl}`,
     ];
     function renderItems(xmlText) {
       const parser = new DOMParser();
