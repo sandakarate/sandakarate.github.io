@@ -925,7 +925,7 @@
     </div>
     <!-- 最新記事一覧 -->
     <div id="blog-posts" style="margin-top:2.5rem;">
-
+      <div style="color:rgba(255,255,255,0.4); font-size:0.85rem; text-align:center; padding:1rem;">記事を読み込み中...</div>
     </div>
   </div>
 </section>
@@ -1142,7 +1142,57 @@
   resetTimer();
 
 
-
+  // アメブロ最新記事取得
+  (function() {
+    const rssUrl = 'https://ameblo.jp/sanda-karate/rss20.xml';
+    // 複数のプロキシを順に試みる
+    const proxies = [
+      `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
+      `https://thingproxy.freeboard.io/fetch/${rssUrl}`,
+    ];
+    function renderItems(xmlText) {
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(xmlText, 'text/xml');
+      const items = Array.from(xml.querySelectorAll('item')).slice(0, 5);
+      const container = document.getElementById('blog-posts');
+      if (!items.length) { container.innerHTML = ''; return; }
+      let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
+      items.forEach(item => {
+        const title = item.querySelector('title')?.textContent || '';
+        const link  = item.querySelector('link')?.nextSibling?.nodeValue?.trim() || item.querySelector('link')?.textContent || '#';
+        const pub   = item.querySelector('pubDate')?.textContent || '';
+        const date  = pub ? new Date(pub).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) : '';
+        html += `<a href="${link}" target="_blank" rel="noopener" style="
+            display:flex;justify-content:space-between;align-items:center;
+            background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+            border-radius:12px;padding:1rem 1.5rem;text-decoration:none;
+            transition:background 0.2s;gap:1rem;"
+          onmouseover="this.style.background='rgba(255,255,255,0.12)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          <div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">
+            <span style="color:var(--red);flex-shrink:0;">📝</span>
+            <span style="color:white;font-size:0.9rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${title}</span>
+          </div>
+          <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;white-space:nowrap;flex-shrink:0;">${date}</span>
+        </a>`;
+      });
+      html += '</div>';
+      document.getElementById('blog-posts').innerHTML = html;
+    }
+    function tryProxy(index) {
+      if (index >= proxies.length) {
+        document.getElementById('blog-posts').innerHTML =
+          '<p style="text-align:center;"><a href="https://ameblo.jp/sanda-karate/" target="_blank" rel="noopener" style="color:var(--red-light);font-size:0.9rem;">📝 アメブロで最新記事を読む →</a></p>';
+        return;
+      }
+      fetch(proxies[index])
+        .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+        .then(text => renderItems(text))
+        .catch(() => tryProxy(index + 1));
+    }
+    tryProxy(0);
+  })();
 
 
 
