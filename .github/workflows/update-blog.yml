@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Fetch Ameblo RSS and update HTML
         run: |
@@ -31,7 +33,6 @@ jobs:
 
           # XMLをパース
           root = ET.fromstring(xml_data)
-          ns = {'content': 'http://purl.org/rss/1.0/modules/content/'}
           items = root.findall('.//item')[:5]
 
           if not items:
@@ -69,7 +70,6 @@ jobs:
           with open('index.html', 'r', encoding='utf-8') as f:
               content = f.read()
 
-          # blog-postsの中身を差し替え
           new_content = re.sub(
               r'(<div id="blog-posts"[^>]*>).*?(</div>)',
               f'\\1{html}\\2',
@@ -87,6 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add index.html
           git diff --staged --quiet || git commit -m "Update blog posts"
           git push
