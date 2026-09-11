@@ -1181,26 +1181,50 @@
   }
 
 
-  // アメブロ最新記事取得（Google Apps Script JSONP経由）
-  function loadBlogPosts(posts) {
-    var container = document.getElementById('blog-posts');
-    if (!posts || posts.length === 0) { container.innerHTML = ''; return; }
-    var html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
-    posts.forEach(function(post) {
-      html += '<a href="' + post.link + '" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1rem 1.5rem;text-decoration:none;transition:background 0.2s;gap:1rem;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;"><span style="color:#D93025;flex-shrink:0;">📝</span><span style="color:white;font-size:0.9rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + post.title + '</span></div><span style="color:rgba(255,255,255,0.4);font-size:0.78rem;white-space:nowrap;flex-shrink:0;">' + post.date + '</span></a>';
-    });
-    html += '</div>';
-    container.innerHTML = html;
+// アメブロ最新記事取得（Google Apps Script JSONP経由）
+function loadBlogPosts(posts) {
+  var container = document.getElementById('blog-posts');
+
+  if (!posts || posts.length === 0) {
+    container.innerHTML = '';
+    return;
   }
+
+  var html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
+
+  posts.forEach(function(post) {
+    html += '<a href="' + post.link + '" target="_blank" rel="noopener" ' +
+      'style="display:flex;justify-content:space-between;align-items:center;' +
+      'background:rgba(255,255,255,0.06);' +
+      'border:1px solid rgba(255,255,255,0.1);' +
+      'border-radius:12px;padding:1rem 1.5rem;' +
+      'text-decoration:none;gap:1rem;">' +
+
+      '<div style="display:flex;align-items:center;gap:0.75rem;overflow:hidden;">' +
+      '<span style="color:#D93025;flex-shrink:0;">📝</span>' +
+      '<span style="color:white;font-size:0.9rem;font-weight:500;' +
+      'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+      post.title +
+      '</span>' +
+      '</div>' +
+
+      '<span style="color:rgba(255,255,255,0.4);font-size:0.78rem;' +
+      'white-space:nowrap;flex-shrink:0;">' +
+      post.date +
+      '</span>' +
+
+      '</a>';
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+// JSONPでGASからブログ記事を取得
 (function() {
   var script = document.createElement('script');
 
   script.src =
     'https://script.google.com/macros/s/AKfycbwCyYR47NQwat4jgDvWy3zIDMNisRgJvgJIDaHRHlfmQBS_PxA90yPiB50lshNKzt0/exec?callback=loadBlogPosts';
-
-  script.onerror = function() {
-    console.log('ブログ記事の取得に失敗しました');
-  };
 
   document.body.appendChild(script);
 })();
