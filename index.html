@@ -1192,11 +1192,18 @@
     html += '</div>';
     container.innerHTML = html;
   }
-  (function() {
-    var script = document.createElement('script');
-    script.src = 'https://script.google.com/macros/s/AKfycbwCyYR47NQwat4jgDvWy3zIDMNisRgJvgJIDaHRHlfmQBS_PxA90yPiB50lshNKzt0/exec?callback=loadBlogPosts';
-    document.head.appendChild(script);
-  })();
+(function() {
+  var script = document.createElement('script');
+
+  script.src =
+    'https://script.google.com/macros/s/AKfycbwCyYR47NQwat4jgDvWy3zIDMNisRgJvgJIDaHRHlfmQBS_PxA90yPiB50lshNKzt0/exec?callback=loadBlogPosts';
+
+  script.onerror = function() {
+    console.log('ブログ記事の取得に失敗しました');
+  };
+
+  document.body.appendChild(script);
+})();
 
   function toggleFaq(el) {
     const item = el.parentElement;
