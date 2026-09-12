@@ -658,6 +658,9 @@
   </div>
 </div>
 
+<!-- NEWS -->
+<div id="news-box" style="display:none; background:rgba(28,43,74,0.95); padding:1rem 2rem; max-width:100%; border-top:2px solid var(--red);"></div>
+
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
   <div class="container">
@@ -1228,6 +1231,34 @@ function loadBlogPosts(posts) {
 
   document.body.appendChild(script);
 })();
+
+
+  // お知らせ取得（Google Apps Script経由）
+  (function() {
+    var script = document.createElement('script');
+    script.src = 'https://script.google.com/macros/s/AKfycbwCyYR47NQwat4jgDvWy3zIDMNisRgJvgJIDaHRHlfmQBS_PxA90yPiB50lshNKzt0/exec?type=news&callback=loadNews';
+    document.head.appendChild(script);
+  })();
+
+  function loadNews(items) {
+    var container = document.getElementById('news-box');
+    if (!container) return;
+    if (!items || items.length === 0) {
+      container.style.display = 'none';
+      return;
+    }
+    var html = '';
+    items.forEach(function(item) {
+      html += '<div style="display:flex;align-items:baseline;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.08);">'
+            + '<span style="color:var(--gold);font-size:0.8rem;white-space:nowrap;">' + item.date + '</span>'
+            + '<span style="color:white;font-size:0.9rem;">' + item.message + '</span>'
+            + '</div>';
+    });
+    container.innerHTML = '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">'
+      + '<span style="color:var(--red);font-weight:700;font-size:0.8rem;letter-spacing:0.1em;">⚠️ お知らせ</span></div>'
+      + html;
+    container.style.display = 'block';
+  }
 
   function toggleFaq(el) {
     const item = el.parentElement;
