@@ -663,7 +663,10 @@
   <div class="container">
     <div class="slideshow-wrap">
       <div class="slideshow" id="slideshow">
-        <div class="slide active"><img src="img01.webp" alt="空手練習風景1" fetchpriority="high"></div>
+        <div class="slide active"><img src="img07.webp" alt="空手練習風景7" fetchpriority="high"></div>
+        <div class="slide"><img src="img08.webp" alt="空手練習風景8" loading="lazy"></div>
+        <div class="slide"><img src="img09.webp" alt="空手練習風景9" loading="lazy"></div>
+        <div class="slide"><img src="img01.webp" alt="空手練習風景1" loading="lazy"></div>
         <div class="slide"><img src="img02.webp" alt="空手練習風景2" loading="lazy"></div>
         <div class="slide"><img src="img03.webp" alt="空手練習風景3" loading="lazy"></div>
         <div class="slide"><img src="img04.webp" alt="空手練習風景4" loading="lazy"></div>
@@ -671,7 +674,7 @@
         <div class="slide"><img src="img06.webp" alt="空手練習風景6" loading="lazy"></div>
         <button class="slide-prev" onclick="slideMove(-1)">&#8249;</button>
         <button class="slide-next" onclick="slideMove(1)">&#8250;</button>
-        <div class="slide-counter"><span id="slide-cur">1</span> / 6</div>
+        <div class="slide-counter"><span id="slide-cur">1</span> / 9</div>
       </div>
       <div class="slide-dots" id="slide-dots"></div>
       <button class="slide-pause" id="slide-pause" onclick="togglePause()">⏸ 一時停止</button>
@@ -1070,7 +1073,7 @@
 <script>
 
   // Slideshow
-  const totalSlides = 6;
+  const totalSlides = 9;
   let slideIndex = 0;
   let paused = false;
   let slideTimer;
